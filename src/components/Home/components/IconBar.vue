@@ -3,14 +3,20 @@
     <h6 v-show="lagn.lagn === 'en'">
       {{ conta.title }}
     </h6>
-    <h5 class="q-ma-sm q-pt-sm text-center " v-show="lagn.lagn === 'ar'">{{ conta.title_ar }}</h5>
+    <h5 class="q-ma-sm q-pt-sm text-center" v-show="lagn.lagn === 'ar'">
+      {{ conta.title_ar }}
+    </h5>
 
     <div class="icon-container text-center">
       <div class="icon-container-svg text-center">
         <q-icon :name="conta.icon" />
       </div>
 
-      <p  class="text-center" v-text="lagn.lagn === 'en' ? conta.pragrph : conta.pragrph_ar"></p>
+      <p
+
+        class="text-center"
+        v-text="lagn.lagn === 'en' ? conta.pragrph : conta.pragrph_ar"
+      ></p>
     </div>
   </div>
 </template>
@@ -22,6 +28,10 @@ export default {
   props: {
     conta: {
       typy: Object,
+      default: null,
+    },
+    price: {
+      typy: Number,
       default: null,
     },
   },
@@ -43,7 +53,7 @@ export default {
     line-height: 1px;
     text-transform: capitalize;
   }
-  h5{
+  h5 {
     font-weight: 500;
   }
   .icon-container {
