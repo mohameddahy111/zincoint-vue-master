@@ -1,0 +1,125 @@
+<template>
+  <q-layout view="hHh LpR fFf">
+    <q-header reveal class="bg-white text-black">
+      <q-toolbar class="q-py-sm">
+        <div class="flex justify-between items-center full-width">
+          <div class="">
+            <q-toolbar-title>
+              <zinco-logo />
+            </q-toolbar-title>
+          </div>
+          <div class="flex items-center q-gutter-md header-Links xs-hide">
+            <MenuItems />
+            <RouterLink to="/about">About us</RouterLink>
+            <RouterLink to="/contact">contact us</RouterLink>
+          </div>
+          <div class="flex items-center justify-center">
+            <Language />
+            <div class="xs-hide sm-hide">
+              <SearchBox />
+            </div>
+            <UserAvatarLayout />
+            <div class="">
+              <q-btn dense round flat icon="shopping_cart">
+                <q-badge color="red" floating transparent>
+                  {{ products.cartItems.length }}
+                </q-badge>
+              </q-btn>
+            </div>
+          </div>
+        </div>
+      </q-toolbar>
+      <div class="flex justify-between items-center q-px-sm">
+        <q-btn
+          dense
+          flat
+          round
+          icon="menu"
+          @click="toggleLeftDrawer"
+          class="sm-hide lg-hide xl-hide md-hide"
+        />
+        <div class="lg-hide xl-hide md-hide">
+          <SearchBox />
+        </div>
+      </div>
+    </q-header>
+
+    <router-view />
+    <FootrtZinco />
+
+    <q-drawer
+      v-model="leftDrawerOpen"
+      side="left"
+      behavior="mobile"
+      bordered
+      class=""
+    >
+      <div
+        class="flex justify-between text-black items-baseline q-gutter-md header-Links"
+      >
+        <q-list>
+          <q-item>
+            <MenuItems />
+          </q-item>
+          <q-item>
+            <RouterLink to="/about">About us</RouterLink>
+          </q-item>
+          <q-item>
+            <RouterLink to="/contact">contact us</RouterLink>
+          </q-item>
+        </q-list>
+        <q-btn icon="close" round dense @click="closeDrower" />
+      </div>
+    </q-drawer>
+  </q-layout>
+</template>
+
+<script>
+import { ref } from "vue";
+import ZincoLogo from "src/components/Layouts/ZincoLogo.vue";
+import MenuItems from "src/components/Layouts/MenuItems.vue";
+import SearchBox from "src/components/Layouts/SearchBox.vue";
+import Language from "src/components/Layouts/Language.vue";
+import UserAvatarLayout from "src/components/Layouts/UserAvatarLayout.vue";
+import { useProductsStore } from "src/stores/products";
+import FootrtZinco from "src/components/Layouts/FooterZinco.vue";
+
+export default {
+  components: {
+    ZincoLogo,
+    MenuItems,
+    SearchBox,
+    UserAvatarLayout,
+    Language,
+    FootrtZinco,
+  },
+  setup() {
+    const leftDrawerOpen = ref(false);
+    const products = useProductsStore();
+
+    return {
+      leftDrawerOpen,
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+      closeDrower() {
+        leftDrawerOpen.value = false;
+      },
+      products,
+    };
+  },
+};
+</script>
+
+<style scoped>
+.header-Links a {
+  text-decoration: none;
+  color: #000;
+}
+@media screen and (max-width: 600px) {
+  .header-Links a {
+    text-decoration: none;
+    color: black;
+  }
+}
+</style>
