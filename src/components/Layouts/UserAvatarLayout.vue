@@ -1,36 +1,45 @@
 <template>
   <div class="q-pa-md">
     <q-btn-dropdown icon="account_circle" unelevated>
-      <div class="row no-wrap q-pa-md">
+      <q-list v-show="!user.user.id">
+        <q-item clickable class="q-px-lg">
+          <q-item-section thumbnail>
+            <q-icon name="login" />
+          </q-item-section>
+          <q-item-section>
+            <RouterLink class="q-btn-item" to="/login"> Log in </RouterLink>
+          </q-item-section>
+        </q-item>
+      </q-list>
+      <RouterLink to="/login"> </RouterLink>
+      <div class="row no-wrap q-pa-md" v-show="user.user.id">
         <div class="column">
           <div class="text-h6 q-mb-md">Settings</div>
           <div class="text-body1 text-capitalize">
             <q-list dese>
-              <q-item clickable class=" q-px-lg" >
-                <q-item-section thumbnail  >
+              <q-item clickable class="q-px-lg">
+                <q-item-section thumbnail>
                   <q-icon name="account_circle" />
-                  </q-item-section>
-                  <q-item-section>
+                </q-item-section>
+                <q-item-section>
                   <RouterLink class="q-btn-item" to="/profile">
                     profile
                   </RouterLink>
                 </q-item-section>
               </q-item>
-              <q-item clickable class=" q-px-lg"  >
+              <q-item clickable class="q-px-lg">
                 <q-item-section thumbnail>
                   <q-icon name="settings" />
                 </q-item-section>
-                <q-item-section >
-                  <RouterLink class="" to="/setting">
-                    setting
-                  </RouterLink>
+                <q-item-section>
+                  <RouterLink class="" to="/setting"> setting </RouterLink>
                 </q-item-section>
               </q-item>
-              <q-item clickable class=" q-px-lg"  >
+              <q-item clickable class="q-px-lg">
                 <q-item-section thumbnail>
                   <q-icon name="favorite_border" />
                 </q-item-section>
-                <q-item-section >
+                <q-item-section>
                   <RouterLink class="q-btn-item" to="/favorite">
                     favorite List
                   </RouterLink>
@@ -47,9 +56,11 @@
             <img src="~assets/images/null-avatar.jpg" />
           </q-avatar>
 
-          <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
+          <div class="text-subtitle1 q-mt-md q-mb-xs">
+            {{ user.user.first_name }}
+          </div>
 
-          <q-btn color="primary" label="Logout" push size="sm" v-close-popup />
+          <q-btn color="primary" @click="logout" label="Logout" push size="sm" v-close-popup />
         </div>
       </div>
     </q-btn-dropdown>
@@ -57,20 +68,28 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
+import { useAuth } from "src/stores/auth";
 
 export default {
   name: "UserAvatarLayout",
   setup() {
+    const user = useAuth();
+    const logout= ()=>{
+      user.user = reactive({})
+
+    }
     return {
       mobileData: ref(false),
       bluetooth: ref(false),
+      user,
+      logout
     };
   },
 };
 </script>
 <style scoped>
-a{
+a {
   text-decoration: none;
   color: black;
 }

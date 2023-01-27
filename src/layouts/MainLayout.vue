@@ -18,7 +18,7 @@
             <div class="xs-hide sm-hide">
               <SearchBox />
             </div>
-            <UserAvatarLayout />
+            <UserAvatarLayout  />
             <div class="">
               <q-btn dense round flat icon="shopping_cart">
                 <q-badge color="red" floating transparent>
@@ -96,7 +96,6 @@ export default {
   setup() {
     const leftDrawerOpen = ref(false);
     const products = useProductsStore();
-
     return {
       leftDrawerOpen,
       toggleLeftDrawer() {

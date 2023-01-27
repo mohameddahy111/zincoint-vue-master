@@ -17,7 +17,6 @@
       </div>
       <SwipreViewCard
         :swiperData="products.allProducts"
-        :v-show="products.allProducts.map((x) => x.is_recently === 1)"
       />
     </div>
     <h4
@@ -28,7 +27,6 @@
       class="q-pa-sm relative-position "
       v-for="(x, index) in products.CategoryWithProducts"
       :key="index"
-      :v-show="products.CategoryWithProducts.map(x=>x.is_active === 1)"
     >
       <div class="flex justify-between items-center q-px-lg">
         <h6
@@ -51,12 +49,11 @@
 import ProductProps from "src/components/Home/productProps.vue";
 import SwiperCaruser from "src/components/Home/SwiperCaruser.vue";
 import IconSwiper from "src/components/Home/components/IconSwiper.vue";
-import { onMounted, computed } from "vue";
+import { onMounted, computed ,onServerPrefetch} from "vue";
 import MasterCard from "../components/MasterCard/MasterCard.vue";
 import { useProductsStore } from "src/stores/products";
 import { useGeneralStore } from "src/stores/general";
 import { mapState, storeToRefs, mapActions } from "pinia";
-import axios from "axios";
 import SwipreViewCard from "src/components/SwipreViewCard.vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -68,7 +65,7 @@ const more = () => {
   router.push(`/cedcedcedce`);
 };
 onMounted(
-  () => products.getProductsWithOffer(),
+ async () => products.getProductsWithOffer(),
   products.getAllProducts(),
   products.getProductListIconsForHome()
 );

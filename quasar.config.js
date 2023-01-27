@@ -85,7 +85,8 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-framework
     framework: {
       config: {
-        notify:{}
+        notify:{},
+        loading:{},
       },
 
       // iconSet: 'material-icons', // Quasar icon set
@@ -100,7 +101,8 @@ module.exports = configure(function (ctx) {
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Loading'
       ]
     },
 

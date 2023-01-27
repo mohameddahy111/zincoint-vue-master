@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref  ,onMounted} from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 
@@ -21,6 +21,12 @@ export const useProductsStore = defineStore("products", () => {
   );
   axios.defaults.baseURL = "https://zincoint.com/api/";
 
+
+
+  // computed(()=>newlist= products.allProducts.filter(x=>x.is_recently === 1))
+
+
+
   async function getAllProducts() {
     return await axios
       .get("recently_products?min=&max=&category_id=&brand_id=&sort=")
@@ -30,19 +36,19 @@ export const useProductsStore = defineStore("products", () => {
   }
   async function getCategoryWithProducts() {
     const { data } = await axios.get("category_with_products");
-    CategoryWithProducts.value = data.data;
+    CategoryWithProducts.value =await data.data;
   }
   async function getProductsWithOffer() {
     const { data } = await axios.get("offers_products");
-    productsWithOffer.value = data.data;
+    productsWithOffer.value =await data.data;
   }
   async function getProductListIconsForHome() {
     const { data } = await axios.get("get_categories?from_home=true");
-    productListIconsForHome.value = data.data.categories;
+    productListIconsForHome.value =await data.data.categories;
   }
   async function getProductDetails(id) {
     const { data } = await axios.get(`/product/${id}`);
-    productDetails.value = data.data;
+    productDetails.value =await data.data;
   }
   return {
     CategoryWithProducts,
@@ -60,5 +66,6 @@ export const useProductsStore = defineStore("products", () => {
     iconsUrl,
     favoritList,
     cartItems,
+    // newlist
   };
 });
