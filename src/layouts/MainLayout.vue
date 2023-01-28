@@ -20,7 +20,7 @@
             </div>
             <UserAvatarLayout  />
             <div class="">
-              <q-btn dense round flat icon="shopping_cart">
+              <q-btn dense round flat icon="shopping_cart" @click="$router.push('/cart')">
                 <q-badge color="red" floating transparent>
                   {{ products.cartItems.length }}
                 </q-badge>
@@ -83,6 +83,7 @@ import Language from "src/components/Layouts/Language.vue";
 import UserAvatarLayout from "src/components/Layouts/UserAvatarLayout.vue";
 import { useProductsStore } from "src/stores/products";
 import FootrtZinco from "src/components/Layouts/FooterZinco.vue";
+import { useRouter } from 'vue-router';
 
 export default {
   components: {
@@ -96,6 +97,8 @@ export default {
   setup() {
     const leftDrawerOpen = ref(false);
     const products = useProductsStore();
+    const $router = useRouter()
+
     return {
       leftDrawerOpen,
       toggleLeftDrawer() {

@@ -2,10 +2,16 @@
   <router-view />
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { onBeforeMount, onMounted } from "vue";
+import { useProductsStore } from "./stores/products";
 
-export default defineComponent({
-  name: 'App'
-})
+const products = useProductsStore();
+
+onBeforeMount(
+  () => products.getProductsWithOffer(),
+  products.getAllProducts(),
+  products.getProductListIconsForHome(),
+  products.getCategoryWithProducts()
+);
 </script>

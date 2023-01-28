@@ -50,6 +50,7 @@ export const useProductsStore = defineStore("products", () => {
     const { data } = await axios.get(`/product/${id}`);
     productDetails.value =await data.data;
   }
+
   return {
     CategoryWithProducts,
     getCategoryWithProducts,

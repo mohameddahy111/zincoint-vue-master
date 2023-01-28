@@ -60,7 +60,7 @@
             {{ user.user.first_name }}
           </div>
 
-          <q-btn color="primary" @click="logout" label="Logout" push size="sm" v-close-popup />
+          <q-btn color="primary" @click="user.logout" label="Logout" push size="sm" v-close-popup />
         </div>
       </div>
     </q-btn-dropdown>
@@ -75,15 +75,10 @@ export default {
   name: "UserAvatarLayout",
   setup() {
     const user = useAuth();
-    const logout= ()=>{
-      user.user = reactive({})
-
-    }
     return {
       mobileData: ref(false),
       bluetooth: ref(false),
       user,
-      logout
     };
   },
 };

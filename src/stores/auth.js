@@ -69,46 +69,87 @@ export const useAuth = defineStore("auth", () => {
       messageColor: "black",
     });
 
-    const {data}= await axios
-      .post("auth/register", {
-        email: values.email,
-        password_login: values.password,
-        first_name: values.firstName,
-        last_name: values.lastName,
-        phone: values.mobile,
-        confirmPassword: values.confirmPassword,
-      })
-        if (data.token) {
-          $q.loading.hide();
-          $q.notify({
-            color: "green-4",
-            textColor: "white",
-            icon: "cloud_done",
-            message: `${
-              lagn.lagn === "ar" ? "تم الاشتراك " : " Your are Register"
-            }`,
-            position: "top",
-          });
-          $router.push("/login");
-        } else {
-          $q.loading.hide();
-          $q.notify({
-            color: "red-5",
-            textColor: "white",
-            icon: "warning",
-            message: `${
-              lagn.lagn === "ar"
-                ? "حدث خطأ من فضلك ادخل البيانات  بطريقة صحيحة"
-                : "  An error occurred, please enter the correct information."
-            }`,
-            position: "top",
-          });
-        }
+    const { data } = await axios.post("auth/register", {
+      email: values.email,
+      password_login: values.password,
+      first_name: values.firstName,
+      last_name: values.lastName,
+      phone: values.mobile,
+      confirmPassword: values.confirmPassword,
+    });
+    if (data.token) {
+      $q.loading.hide();
+      $q.notify({
+        color: "green-4",
+        textColor: "white",
+        icon: "cloud_done",
+        message: `${
+          lagn.lagn === "ar" ? "تم الاشتراك " : " Your are Register"
+        }`,
+        position: "top",
+      });
+      $router.push("/login");
+    } else {
+      $q.loading.hide();
+      $q.notify({
+        color: "red-5",
+        textColor: "white",
+        icon: "warning",
+        message: `${
+          lagn.lagn === "ar"
+            ? "حدث خطأ من فضلك ادخل البيانات  بطريقة صحيحة"
+            : "  An error occurred, please enter the correct information."
+        }`,
+        position: "top",
+      });
+    }
+  };
+  const logout = async () => {
+    $q.loading.show({
+      spinner: QSpinnerFacebook,
+      spinnerColor: "yellow",
+      spinnerSize: 140,
+      backgroundColor: "purple",
+      message: "Some important process is in progress. Hang on...",
+      messageColor: "black",
+    });
+    try {
+      const data = await axios.get("auth/logout");
+      if (data.status === 200) {
+        console.log(data);
+        localStorage.removeItem("userToken", JSON.stringify(data.token));
+        localStorage.removeItem("useInf", JSON.stringify(data.user));
+        user.value = {};
+        $q.loading.hide();
+        $q.notify({
+          color: "warning",
+          textColor: "white",
+          icon: "warning",
+          message: `${
+            lagn.lagn === "ar" ? " تم تسجيل الخروج" : " You are Log out"
+          }`,
+          position: "top",
+        });
+      }
+    } catch (error) {
+      $q.notify({
+        color: "red-5",
+        textColor: "white",
+        icon: "close",
+        message: `${
+          lagn.lagn === "ar"
+            ? "حدث خطاء  ما اعد المحاولة  "
+            : " An error occurred, try again"
+        }`,
+        position: "top",
+      });
+    }
   };
 
   return {
     user,
     login,
     register,
+    logout,
   };
 });

@@ -8,6 +8,7 @@
         />
       </RouterLink>
       <span v-show="showdata.is_recently === 1" info="new"></span>
+      <span  v-show="showdata.quantities === 0"  info="not available"></span>
       <div class="icons">
         <q-btn icon="visibility" round @click="showDialog">
           <q-tooltip
@@ -44,6 +45,8 @@
     </div>
     <DialogBox v-model="dialogBox" :dialogData="showdata" />
   </div>
+  <q-rating v-model="ratingModel" color="black" size="1.5rem" icon="star_outline" icon-half="star_half" iconSelected="star"/>
+
 </template>
 
 <script setup>
@@ -57,6 +60,8 @@ const $q = useQuasar();
 const lang = useGeneralStore();
 const dialogBox = ref(false);
 const favorit = ref(false);
+const ratingModel =ref(0)
+
 defineProps(["showdata"]);
 const showDialog = () => {
   dialogBox.value = true;
@@ -189,7 +194,7 @@ const addToCart = (item) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: rgb(252, 12, 12);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;

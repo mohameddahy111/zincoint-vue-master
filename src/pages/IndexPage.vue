@@ -1,8 +1,16 @@
 <template>
-  <div :class="`${lang.lagn=== 'ar' ? 'aribc relative-position' :'relative-position'}`" >
+  <div
+    :class="`${
+      lang.lagn === 'ar' ? 'aribc relative-position' : 'relative-position'
+    }`"
+  >
     <SwiperCaruser />
     <ProductProps />
-    <IconSwiper :iconArry="products.productListIconsForHome" />
+    <IconSwiper
+      :iconArry="
+        products.productListIconsForHome ? products.productListIconsForHome : []
+      "
+    />
     <div class="q-pa-md relative-position">
       <div class="flex justify-between items-center q-px-lg">
         <h6
@@ -16,7 +24,7 @@
         ></q-btn>
       </div>
       <SwipreViewCard
-        :swiperData="products.allProducts"
+        :swiperData="products.allProducts ? products.allProducts : []"
       />
     </div>
     <h4
@@ -24,7 +32,7 @@
       v-text="lang.lagn === 'en' ? 'we chose for you' : 'اخترنا لك '"
     ></h4>
     <div
-      class="q-pa-sm relative-position "
+      class="q-pa-sm relative-position"
       v-for="(x, index) in products.CategoryWithProducts"
       :key="index"
     >
@@ -40,7 +48,7 @@
         >
         </q-btn>
       </div>
-      <SwipreViewCard :swiperData="x.products" />
+      <SwipreViewCard :swiperData="x.products ? x.products : []" />
     </div>
   </div>
 </template>
@@ -49,7 +57,7 @@
 import ProductProps from "src/components/Home/productProps.vue";
 import SwiperCaruser from "src/components/Home/SwiperCaruser.vue";
 import IconSwiper from "src/components/Home/components/IconSwiper.vue";
-import { onMounted, computed ,onServerPrefetch} from "vue";
+import { onMounted, beforeCreate, onBeforeMount } from "vue";
 import MasterCard from "../components/MasterCard/MasterCard.vue";
 import { useProductsStore } from "src/stores/products";
 import { useGeneralStore } from "src/stores/general";
@@ -64,11 +72,6 @@ const lang = useGeneralStore();
 const more = () => {
   router.push(`/cedcedcedce`);
 };
-onMounted(
- async () => products.getProductsWithOffer(),
-  products.getAllProducts(),
-  products.getProductListIconsForHome()
-);
 </script>
 <style lang="scss" scoped>
 @media screen and (max-width: 500px) {

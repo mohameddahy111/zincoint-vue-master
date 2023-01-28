@@ -3,15 +3,24 @@
     <q-btn flat label="Products" class="shadow-0">
       <q-menu uclass=" shadow-0">
         <q-list dese style="min-width: 100px">
-          <q-item clickable v-for="(x,index) in products.CategoryWithProducts" :key="index">
-            <q-item-section>{{x.name_en}} </q-item-section>
+          <q-item
+            clickable
+            v-for="(x, index) in products.CategoryWithProducts"
+            :key="index"
+          >
+            <q-item-section>{{ x.name_en }} </q-item-section>
             <q-item-section side>
               <q-icon name="keyboard_arrow_right" />
             </q-item-section>
 
             <q-menu anchor="top end" self="top start">
               <q-list>
-                <q-item v-for="(y,index) in x.products" :key="index" dense clickable>
+                <q-item
+                  v-for="(y, index) in x.products"
+                  :key="index"
+                  dense
+                  clickable
+                >
                   <q-item-section> {{ y.name_en }}</q-item-section>
                   <!-- <q-item-section side>
                     <q-icon name="keyboard_arrow_right" />
@@ -41,7 +50,6 @@
 import { onMounted } from "vue";
 import { useProductsStore } from "../../stores/products";
 const products = useProductsStore();
-onMounted(()=>(products.getCategoryWithProducts()))
 </script>
 
 <style>
