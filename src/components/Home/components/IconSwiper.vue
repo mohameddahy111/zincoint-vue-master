@@ -33,12 +33,15 @@
         :key="index"
         :virtualIndex="index"
       >
+      <router-link :to="`category/${x.id}`" >
+
         <img
-          :src="`https://zincoint.com/public/upload/categories/categories_icons/${x.icon}`"
-          alt=""
+        :src="`https://zincoint.com/public/upload/categories/categories_icons/${x.icon}`"
+        alt=""
         />
         <p v-text="lang.lagn === 'en' ? x.name_en : x.name_ar">
         </p>
+      </router-link>
       </swiper-slide>
     </swiper>
   </div>

@@ -98,7 +98,7 @@
             {{ lang.lagn === "ar" ? "سياسات زينكو" : "zinco policy" }}
           </q-item-label>
           <q-item>
-            <RouterLink to="/">
+            <RouterLink to="/privacy_Policy">
               {{ lang.lagn === "ar" ? "سياسة الخصوصية" : "privacy policy" }}
             </RouterLink>
           </q-item>
@@ -108,7 +108,7 @@
             </RouterLink>
           </q-item>
           <q-item>
-            <RouterLink to="/">
+            <RouterLink to="/terms_Condition">
               {{ lang.lagn === "ar" ? "الشروط والاحكام" : "Terms and Conditions" }}
             </RouterLink>
           </q-item>

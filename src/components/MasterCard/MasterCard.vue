@@ -45,7 +45,7 @@
     </div>
     <DialogBox v-model="dialogBox" :dialogData="showdata" />
   </div>
-  <q-rating v-model="ratingModel" color="black" size="1.5rem" icon="star_outline" icon-half="star_half" iconSelected="star"/>
+  <q-rating class="q-mt-md" v-model="ratingModel" color="black" size="1.5rem" icon="star_outline" icon-half="star_half" iconSelected="star"/>
 
 </template>
 

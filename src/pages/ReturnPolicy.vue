@@ -16,7 +16,6 @@ onMounted(async () => {
     await axios
       .get("https://zincoint.com/api/return_policy")
       .then((res) => (returnData.value = res.data.data.return_policy))
-      .then((res) => console.log(res));
   } catch (error) {}
 });
 </script>

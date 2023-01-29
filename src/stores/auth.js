@@ -79,7 +79,7 @@ export const useAuth = defineStore("auth", () => {
     });
     if (data.token) {
       $q.loading.hide();
-      $q.notify({
+      $q.notify({ 
         color: "green-4",
         textColor: "white",
         icon: "cloud_done",
