@@ -201,7 +201,6 @@
       </div>
       <div>
         <q-btn
-          glossy
           class="full-width text-h6 q-mb-md"
           rounded
           :label="lagn.lagn === 'en' ? 'Register Now' : 'اشترك الان'"

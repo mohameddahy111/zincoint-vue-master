@@ -13,6 +13,7 @@
     />
     <div class="q-pa-md relative-position">
       <div class="flex justify-between items-center q-px-lg">
+
         <h6
           class="text-capitalize"
           v-text="lang.lagn === 'en' ? 'new collection ' : 'اصدار جديد'"
@@ -74,6 +75,10 @@ const more = () => {
 };
 </script>
 <style lang="scss" scoped>
+h6 , h5 ,h4{
+  margin: 0px;
+  font-weight:600;
+}
 @media screen and (max-width: 500px) {
   h6 {
     font-size: 14px;

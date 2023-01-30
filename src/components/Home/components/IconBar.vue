@@ -1,20 +1,14 @@
 <template>
   <div class="all">
-    <h6 v-show="lagn.lagn === 'en'">
-      {{ conta.title }}
-    </h6>
-    <h5 class="q-ma-sm q-pt-sm text-center" v-show="lagn.lagn === 'ar'">
-      {{ conta.title_ar }}
-    </h5>
 
-    <div class="icon-container text-center">
-      <div class="icon-container-svg text-center">
+    <h6 class="q-my-sm q-pt-md q-pa-sm " >
+      {{lagn.lagn === 'ar'? conta.title_ar  :conta.title}}
+    </h6>
+    <div class="icon-container">
+      <div class="icon-container-svg ">
         <q-icon :name="conta.icon" />
       </div>
-
       <p
-
-        class="text-center"
         v-text="lagn.lagn === 'en' ? conta.pragrph : conta.pragrph_ar"
       ></p>
     </div>
@@ -46,35 +40,35 @@ export default {
 <style lang="scss" scoped>
 .all {
   @media screen and (min-width: 300px) and (max-width: 1200px) {
-    display: none;
   }
   h6 {
-    font-size: 14px;
+    font-size: 17px;
     line-height: 1px;
     text-transform: capitalize;
-  }
-  h5 {
-    font-weight: 500;
+    font-weight: 700;
   }
   .icon-container {
     display: flex;
     padding-bottom: 20px;
     gap: 10px;
+    justify-content: start;
+    align-items:flex-start;
+    text-align:justify;
     .icon-container-svg {
       background: #bdd7fa;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 10px;
       i {
         color: #347efe;
-        font-size: 24px;
+        font-size: 20px;
       }
     }
     p {
-      width: 50%;
+      width: 60%;
     }
   }
 }

@@ -1,11 +1,14 @@
 <template>
-  <q-layout view="hHh LpR fFf">
+  <q-layout view="hHh LpR fFf" :class="lang.lagn === 'ar' ? 'aribc' :''">
     <q-header reveal class="bg-white text-black">
-      <q-toolbar class="q-py-sm">
+      <q-toolbar class="q-toolbar--inset q-pr-xl">
         <div class="flex justify-between items-center full-width">
           <div class="">
-            <q-toolbar-title>
+            <q-toolbar-title class=" flex">
               <zinco-logo />
+              <div class="xs-hide sm-hide">
+                <SearchBox />
+              </div>
             </q-toolbar-title>
           </div>
           <div class="flex items-center q-gutter-md header-Links xs-hide">
@@ -15,12 +18,15 @@
           </div>
           <div class="flex items-center justify-center">
             <Language />
-            <div class="xs-hide sm-hide">
-              <SearchBox />
-            </div>
-            <UserAvatarLayout  />
+            <UserAvatarLayout />
             <div class="">
-              <q-btn dense round flat icon="shopping_cart" @click="$router.push('/cart')">
+              <q-btn
+                dense
+                round
+                flat
+                icon="shopping_cart"
+                @click="$router.push('/cart')"
+              >
                 <q-badge color="red" floating transparent>
                   {{ products.cartItems.length }}
                 </q-badge>
@@ -29,7 +35,7 @@
           </div>
         </div>
       </q-toolbar>
-      <div class="flex justify-between items-center q-px-sm">
+      <div class="flex justify-center items-center q-px-sm">
         <q-btn
           dense
           flat
@@ -83,7 +89,9 @@ import Language from "src/components/Layouts/Language.vue";
 import UserAvatarLayout from "src/components/Layouts/UserAvatarLayout.vue";
 import { useProductsStore } from "src/stores/products";
 import FootrtZinco from "src/components/Layouts/FooterZinco.vue";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
+import { useGeneralStore } from 'src/stores/general';
+
 
 export default {
   components: {
@@ -97,7 +105,7 @@ export default {
   setup() {
     const leftDrawerOpen = ref(false);
     const products = useProductsStore();
-    const $router = useRouter()
+    const $router = useRouter();
 
     return {
       leftDrawerOpen,
@@ -108,6 +116,7 @@ export default {
         leftDrawerOpen.value = false;
       },
       products,
+      lang:useGeneralStore()
     };
   },
 };

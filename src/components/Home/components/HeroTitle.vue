@@ -3,10 +3,10 @@
     <h3 class="text-capitalize text-weight-bold text-white">
       <slot></slot>
     </h3>
-    <div class="flex justify-center items-center q-gutter-lg">
+    <!-- <div class="flex justify-center items-center q-gutter-lg">
       <q-icon size="30px" name="play_circle_filled" color="primary" unelevated round />
       <RouterLink to="/shop" class="text-h6"> Shopping Now </RouterLink>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -46,4 +46,3 @@ a {
 }
 </style>
 
-function newFunction() { return "title"; }

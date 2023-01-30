@@ -10,11 +10,39 @@
           <img
             :src="img ? img : products.imageUrl + x.name"
             :alt="products.productDetails.name_ar"
-            class="full-width rounded-borders shadow-5"
+            @click="medium = true"
+            class="full-width rounded-borders shadow-5 "
             v-show="x.default === 1"
           />
         </div>
-        <div
+        <q-dialog
+
+          full-height
+          v-model="medium"
+          transition-show="flip-down"
+          transition-hide="flip-up"
+          class=" bg-transparent"
+        >
+          <!-- <q-bar style=""> -->
+            <q-carousel swipeable animated v-model="slide" v-model:fullscreen="fullscreen" thumbnails infinite arrows class="bg-transparent full-width full-height q-pa-md " >
+              <q-carousel-slide
+                :name="index"
+                @click="fullscreen=!fullscreen"
+                :img-src="products.imageUrl + x.name"
+                v-for="(x, index) in products.productDetails.images"
+                :key="index"
+              />
+              <q-btn dense flat icon="close" class=" z-notify absolute-top-right  bg-white" v-close-popup>
+                <q-tooltip>Close</q-tooltip>
+              </q-btn>
+            </q-carousel>
+            <q-btn dense flat icon="close" class=" absolute-top-right  bg-white" v-close-popup>
+              <q-tooltip>Close</q-tooltip>
+            </q-btn>
+
+          <!-- </q-bar> -->
+        </q-dialog>
+        <!-- <div
           class=" "
           v-for="(x, index) in products.productDetails.images"
           :key="index"
@@ -25,7 +53,7 @@
             class="cursor-pointer rounded-borders shadow-5 q-ma-xs"
             @click="changeImg(products.imageUrl + x.name)"
           />
-        </div>
+        </div> -->
       </div>
       <div class="col-12 col-sm-6 col-md-5 q-px-md">
         <div class="flex justify-between full-width">
@@ -67,11 +95,8 @@
               {{ lagn.lagn === "ar" ? "رقم الصنف" : "Item No" }} :
               {{ products.productDetails.number }}
             </p>
-
           </q-item>
-          <q-item>
-            
-          </q-item>
+          <q-item> </q-item>
         </q-list>
 
         <!-- <div
@@ -97,6 +122,9 @@ const products = useProductsStore();
 const lagn = useGeneralStore();
 const route = useRoute();
 const img = ref("");
+const medium = ref(false);
+const fullscreen= ref(false)
+const slide = ref(1);
 const propsDelviry = [
   {
     title: "Fast delivery",
@@ -122,4 +150,11 @@ const changeImg = (scr) => {
 onMounted(() => products.getProductDetails(route.params.id));
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.q-carousel__slide{
+  cursor: zoom-in;
+}
+img{
+  cursor: zoom-in;
+}
+</style>>

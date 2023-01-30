@@ -45,7 +45,7 @@
     </div>
     <DialogBox v-model="dialogBox" :dialogData="showdata" />
   </div>
-  <q-rating class="q-mt-md" v-model="ratingModel" color="black" size="1.5rem" icon="star_outline" icon-half="star_half" iconSelected="star"/>
+  <q-rating class="q-mt-md" v-model="ratingModel" color="secondary" size="1.5rem" icon="star_border" icon-half="star_half" iconSelected="grade"/>
 
 </template>
 
@@ -194,7 +194,7 @@ const addToCart = (item) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgb(252, 12, 12);
+  color: rgb(255, 255, 255);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;

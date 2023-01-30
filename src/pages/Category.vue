@@ -48,7 +48,7 @@
         <div
           v-for="(x, index) in products.data"
           :key="index"
-          class="col-3 q-my-sm q-pa-md"
+          class="col-6 q-my-sm q-pa-md "
         >
           <MasterCard :showdata="x" />
           <p class="text-h6">

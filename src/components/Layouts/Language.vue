@@ -1,11 +1,8 @@
 <template>
   <div class="q-pa-md">
     <q-btn-dropdown
-      split
       unelevated
-      no-caps
       :label="lang.lagn === 'en' ? 'English' : 'العربية'"
-      @click="onMainClick"
     >
       <q-list v-for="(x, index) in listLanguage" :key="index">
         <q-item clickable v-close-popup @click="onItemClick(x.val)">
@@ -22,7 +19,6 @@
 import { useGeneralStore } from "stores/general.js";
 
 const lang = useGeneralStore();
-const onMainClick = () => {};
 const onItemClick = (val) => {
   lang.lagn = val;
 };

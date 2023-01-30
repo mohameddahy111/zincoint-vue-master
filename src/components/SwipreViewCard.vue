@@ -25,12 +25,12 @@
     <swiper-slide v-for="(x, index) in swiperData" :key="index">
       <master-card :showdata="x" />
       <p
-        class="text-center relative-position text-h6"
+        class="text-center relative-position "
         v-text="lang.lagn === 'en' ? x.name_en : x.name_ar"
       ></p>
       <p
         class="text-center relative-position"
-        v-text="lang.lagn === 'en' ? x.price + 'Rs' : x.price + ' ريال '"
+        v-text="lang.lagn === 'en' ? x.price + ' Rs' : x.price +  ' ريال  '"
       ></p>
     </swiper-slide>
   </swiper>
@@ -57,6 +57,12 @@ defineProps(["swiperData"]);
   margin-top: 20px;
   width: 100%;
 }
+p{
+  font-size: 18px;
+  margin: 0px;
+  font-weight: 700;
+}
+
 @media screen and (max-width: 500px) {
   .swiper {
     width: 100%;

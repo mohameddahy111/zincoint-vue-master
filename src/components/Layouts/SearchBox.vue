@@ -36,10 +36,10 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "SearchBox",
-};
+
+<script setup>
+import { useGeneralStore } from 'src/stores/general';
+ const  lang =useGeneralStore()
 </script>
 
 <style>
@@ -58,7 +58,7 @@ export default {
   width: var(--size-button);
   transition: all ease 0.3s;
   background-color: transparent;
-  /* box-shadow: 1.5px 1.5px 3px #0e0e0e, -1.5px -1.5px 3px rgb(95 94 94 / 25%), inset 0px 0px 0px #0e0e0e, inset 0px -0px 0px #5f5e5e; */
+  /* box-shadow: 1.5px 1.5px 3px #0e0e0e, -1.5px -1.5px 3px rgb(95 94 94 / 25%), inset 0px 0px 0px #0e0e0e, inset 0px -0px 0px #5f5e5e;*/
   border-radius: 50px;
   cursor: pointer;
 }
@@ -84,6 +84,7 @@ export default {
   position: absolute;
   width: var(--size-button);
   height: var(--size-button);
+
   top: 0;
   left: 0;
   padding: 8px;

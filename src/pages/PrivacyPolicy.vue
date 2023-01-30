@@ -1,5 +1,5 @@
 <template>
-  <q-page-container :class="lagn.lagn === 'ar' ? 'aribc q-pr-md' : 'q-pl-md'">
+  <q-page-container :class="lagn.lagn === 'ar' ? 'aribc q-pr-xl' : 'q-pl-xl'">
     <h4 class="text-center text-weight-bold">
       {{ lagn.lagn === "ar" ? returnData.name_ar : returnData.name_en }}
     </h4>
@@ -27,4 +27,11 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.privacy{
+
+ ul li p{
+    font-size: 20px;
+  }
+}
+</style>

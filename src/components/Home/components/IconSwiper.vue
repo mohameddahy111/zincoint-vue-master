@@ -4,9 +4,10 @@
       :modules="modules"
       :slidesPerView="6"
       :centeredSlides="fals"
-      :spaceBetween="30"
+      :spaceBetween="0"
       :navigation="true"
       :virtual="true"
+
       class="mySwiper"
       :breakpoints="{
       300: {
@@ -19,7 +20,7 @@
         slidesPerView: 4,
       },
       1200: {
-        slidesPerView: 6,
+        slidesPerView: 7,
       },
       1600:{
         slidesPerView:7,
@@ -39,10 +40,11 @@
         :src="`https://zincoint.com/public/upload/categories/categories_icons/${x.icon}`"
         alt=""
         />
-        <p v-text="lang.lagn === 'en' ? x.name_en : x.name_ar">
-        </p>
       </router-link>
-      </swiper-slide>
+      <p v-text="lang.lagn === 'en' ? x.name_en : x.name_ar">
+      </p>
+    </swiper-slide>
+
     </swiper>
   </div>
 </template>
@@ -76,8 +78,7 @@ export default {
 <style >
 .swiper {
   width: 90%;
-  /* height: 100%; */
-  padding: 60px 60px;
+  padding: 30px 60px;
 }
 
 .swiper-slide {
@@ -99,7 +100,7 @@ export default {
 
   -webkit-align-items: center;
   align-items: center;
-  width: 90px;
+  width: 60px;
   flex-direction: column;
   gap: 20px;
   background-color: transparent;
@@ -107,23 +108,11 @@ export default {
 
 .swiper-slide img {
   display: block;
-   width: 90px;
+   width: 60px;
   /* height: 50%; */
 }
-.append-buttons {
-  text-align: center;
-  margin-top: 20px;
+p{
+  font-size: 14px;
 }
 
-.append-buttons button {
-  display: inline-block;
-  cursor: pointer;
-  border: 1px solid #007aff;
-  color: #007aff;
-  text-decoration: none;
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin: 0 10px;
-  font-size: 13px;
-}
 </style>

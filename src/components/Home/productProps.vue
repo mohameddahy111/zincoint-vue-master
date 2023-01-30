@@ -2,11 +2,11 @@
   <div
     :class="
       lang.lagn === 'en'
-        ? 'productes-props row shadow-5'
-        : 'productes-props row shadow-5 aribcleft'
+        ? 'productes-props row shadow-5 xs-hide sm-hide'
+        : 'productes-props row shadow-5 aribcleft xs-hide sm-hide'
     "
   >
-    <div class="col-3" v-for="(icon, index) in icons" :key="index">
+    <div class="col-3 " v-for="(icon, index) in icons" :key="index">
       <IconBar :conta="icon" />
     </div>
   </div>
@@ -33,11 +33,11 @@ export default {
         title_ar: "امكانية الاستبدال",
         icon: "admin_panel_settings",
         pragrph: "Exchange and return policy",
-        pragrph_ar: "سياسة الاستبدال و الاسترجتع",
+        pragrph_ar: " سياسة الاستبدال والاسترجاع",
       },
       {
         title: "Gifts and coupons",
-        title_ar: "هدايا وكبونات",
+        title_ar: "هدايا وكوبونات",
         icon: "redeem",
         pragrph: " Many gifts and coupon",
         pragrph_ar: " العديد من الهدايا والكوبونات",

@@ -25,21 +25,21 @@
       <template v-slot:control>
         <q-carousel-control
           :position='lang.lagn ==="en" ? "bottom-right": "bottom-left" '
-          :offset="[18, 30]"
+          :offset="[30, 45]"
           class="q-gutter-sm navigation z-fab"
         >
           <q-btn
             push
             text-color="white"
-            :icon='lang.lagn ==="en" ? "arrow_left" :"arrow_right"'
-            class="text-h5"
+            :icon='lang.lagn ==="en" ? "arrow_back" :"arrow_forward"'
+            class="text-h6"
             @click="$refs.carousel.previous()"
           />
           <q-btn
             push
             text-color="white"
-            :icon='lang.lagn ==="en" ? "arrow_right" :"arrow_left"'
-            class="text-h5"
+            :icon='lang.lagn ==="en" ? "arrow_forward" :"arrow_back"'
+            class="text-h6"
             @click="$refs.carousel.next()"
           />
         </q-carousel-control>

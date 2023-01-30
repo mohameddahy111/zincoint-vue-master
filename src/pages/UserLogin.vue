@@ -77,8 +77,7 @@
     </div>
       <div>
         <q-btn
-          glossy
-          class=" full-width text-h6   q-mb-md "
+          class=" full-width text-h6 q-mb-md"
           rounded
           :label="lagn.lagn === 'en' ? 'Log in' : 'تسجيل الدخول'"
           type="submit"
@@ -124,7 +123,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .form {
-  width: 600px;
+  width: 400px;
   margin:20px auto;
   border-radius: 20px;
   a{
