@@ -52,7 +52,10 @@
         />
       </div>
       <div class="flex justify-center q-mt-md items-center tax">
-        <a href="https://maroof.sa/235179" class="maroof">
+        <a
+          href="https://maroof.sa/235179"
+          :class="lang.lagn === 'ar' ? 'maroof-ar' : 'maroof'"
+        >
           <img src="/img/maroof.png" alt="maroof" />
         </a>
         <a href="/">
@@ -60,11 +63,11 @@
         </a>
 
         <a href="/">
-          <img src="/img/vat.png" alt="vat" />
+          <img src="/img/vat.png" alt="vat" height="60" style="width: 50px" />
         </a>
       </div>
     </div>
-    <div class="col-12 col-md-6 row q-mt-lg text-capitalize ">
+    <div class="col-12 col-md-6 row q-mt-lg text-capitalize">
       <div class="col-6 col-md-4 websit-list">
         <q-list>
           <q-item-label class="text-h6 q-mb-md">
@@ -109,7 +112,9 @@
           </q-item>
           <q-item>
             <RouterLink to="/terms_Condition">
-              {{ lang.lagn === "ar" ? "الشروط والاحكام" : "Terms and Conditions" }}
+              {{
+                lang.lagn === "ar" ? "الشروط والاحكام" : "Terms and Conditions"
+              }}
             </RouterLink>
           </q-item>
         </q-list>
@@ -129,12 +134,46 @@
       </div>
     </div>
   </div>
+  <div class=" soical  row flex justify-center ">
+    <div class=" flex  flex q-gutter-md" >
+      <a href="http://">
+        <q-icon size="xs">
+          <i class="fa-brands fa-whatsapp"></i>
+        </q-icon>
+      </a>
+      <a href="http://">
+        <q-icon size="xs">
+          <i class="fa-brands fa-snapchat"></i>
+        </q-icon>
+      </a>
+
+      <a href="http://">
+        <q-icon size="xs"> <i class="fa-brands fa-instagram"></i> </q-icon>
+      </a>
+      <a href="http://">
+        <q-icon size="xs">
+          <i class="fa-brands fa-facebook-f"></i>        </q-icon>
+      </a>
+
+      <a href="http://">
+        <q-icon size="xs">
+          <i class="fa-brands fa-square-twitter"></i>          </q-icon>
+      </a>
+      <a href="http://">
+        <q-icon size="xs">
+          <i class="fa-brands fa-linkedin-in"></i>          </q-icon>
+      </a>
+    </div>
+      <p >جميع الحقوق محفوظة شركة زينكو © 2023</p>
+
+  </div>
 </template>
 
 <script setup>
 import ZincoLogo from "./ZincoLogo.vue";
 import { useGeneralStore } from "src/stores/general";
 import { RouterLink } from "vue-router";
+import { QIcon } from "quasar";
 const lang = useGeneralStore();
 </script>
 
@@ -157,6 +196,12 @@ const lang = useGeneralStore();
   border-right: 1.5px gray solid;
   margin-right: 20px;
 }
+.maroof-ar {
+  border-left: 1.5px gray solid;
+  padding-left: 20px;
+  display: block;
+}
+
 .payment {
   gap: 10px;
   margin-top: 10px;
@@ -169,5 +214,17 @@ const lang = useGeneralStore();
   a {
     color: inherit;
   }
+}
+.soical {
+  color: inherit;
+  border-top: 1px solid gray;
+  padding: 10px;
+  gap: 20px;
+  a {
+    color:inherit;
+  }
+  p{
+    font-size: 16px
+  };
 }
 </style>

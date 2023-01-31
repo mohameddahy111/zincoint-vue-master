@@ -8,6 +8,7 @@ import { useRouter } from "vue-router";
 export const useAuth = defineStore("auth", () => {
   axios.defaults.baseURL = "https://zincoint.com/api/";
   const user = ref(localStorage.useInf ? JSON.parse(localStorage.useInf) : {});
+  const userToken = ref(localStorage.userToken ? JSON.parse(localStorage.userToken) : null);
 
   const $q = useQuasar();
   const lagn = useGeneralStore();
@@ -40,6 +41,7 @@ export const useAuth = defineStore("auth", () => {
           position: "top",
         });
         user.value = data.user;
+        userToken.value = data.token
         $q.loading.hide();
         $router.push("/");
       }
@@ -79,7 +81,7 @@ export const useAuth = defineStore("auth", () => {
     });
     if (data.token) {
       $q.loading.hide();
-      $q.notify({ 
+      $q.notify({
         color: "green-4",
         textColor: "white",
         icon: "cloud_done",
@@ -120,6 +122,8 @@ export const useAuth = defineStore("auth", () => {
         localStorage.removeItem("userToken", JSON.stringify(data.token));
         localStorage.removeItem("useInf", JSON.stringify(data.user));
         user.value = {};
+        userToken.value =null
+
         $q.loading.hide();
         $q.notify({
           color: "warning",
@@ -151,5 +155,6 @@ export const useAuth = defineStore("auth", () => {
     login,
     register,
     logout,
+    userToken,
   };
 });

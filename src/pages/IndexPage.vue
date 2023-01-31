@@ -1,10 +1,12 @@
 <template>
   <div
-    :class="`${
-      lang.lagn === 'ar' ? 'aribc relative-position' : 'relative-position'
-    }`"
+  :class="`${
+    lang.lagn === 'ar' ? 'aribc relative-position' : 'relative-position'
+  }`"
   >
-    <SwiperCaruser />
+  
+  <SwiperCaruser />
+  <q-ajax-bar/>
     <ProductProps />
     <IconSwiper
       :iconArry="
@@ -13,14 +15,13 @@
     />
     <div class="q-pa-md relative-position">
       <div class="flex justify-between items-center q-px-lg">
-
         <h6
           class="text-capitalize"
           v-text="lang.lagn === 'en' ? 'new collection ' : 'اصدار جديد'"
         ></h6>
         <q-btn
           icon-right="arrow_right_alt"
-          @click="more"
+          @click="more()"
           v-text="lang.lagn === 'en' ? 'More' : 'المزيد'"
         ></q-btn>
       </div>
@@ -29,7 +30,7 @@
       />
     </div>
     <h4
-      class="text-center text-weight-bolder q-ma-0"
+      class="text-center text-weight-bolder q-py-md"
       v-text="lang.lagn === 'en' ? 'we chose for you' : 'اخترنا لك '"
     ></h4>
     <div
@@ -37,14 +38,21 @@
       v-for="(x, index) in products.CategoryWithProducts"
       :key="index"
     >
-      <div class="flex justify-between items-center q-px-lg">
-        <h6
-          class="text-capitalize"
-          v-text="lang.lagn === 'en' ? x.name_en : x.name_ar"
-        ></h6>
+      <div class="flex justify-between items-center q-pa-lg">
+        <div class="">
+          <span
+            class="text-capitalize text-h6 text-weight-bold"
+            v-text="lang.lagn === 'en' ? x.name_en : x.name_ar"
+          >
+          </span>{{ "" }}
+          <span
+            class="text-capitalize text-weight-bold"
+            v-text="lang.lagn === 'en' ?`( ${ x.name_en} Provided by Zinco )` :`( ${ x.name_ar} مقدمة من زينكو )`"
+          >
+          </span>
+        </div>
         <q-btn
-          icon-right="arrow_right_alt"
-          @click="more"
+          @click="more(x.id)"
           v-text="lang.lagn === 'en' ? 'More' : 'المزيد'"
         >
         </q-btn>
@@ -70,14 +78,16 @@ const router = useRouter();
 const products = useProductsStore();
 const lang = useGeneralStore();
 
-const more = () => {
-  router.push(`/cedcedcedce`);
+const more = (id) => {
+  router.push(`/category/${id}`);
 };
 </script>
 <style lang="scss" scoped>
-h6 , h5 ,h4{
+h6,
+h5,
+h4 {
   margin: 0px;
-  font-weight:600;
+  font-weight: 600;
 }
 @media screen and (max-width: 500px) {
   h6 {

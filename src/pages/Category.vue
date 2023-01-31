@@ -45,6 +45,8 @@
         />
       </div>
       <div class="row text-center">
+        <q-ajax-bar color="primary" size="5px"/>
+
         <div
           v-for="(x, index) in products.data"
           :key="index"

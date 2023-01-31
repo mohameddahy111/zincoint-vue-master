@@ -20,7 +20,7 @@
       },
     }"
     :modules="modules"
-    class="mySwiper"
+    class="mySwiper shadow-1"
   >
     <swiper-slide v-for="(x, index) in swiperData" :key="index">
       <master-card :showdata="x" />

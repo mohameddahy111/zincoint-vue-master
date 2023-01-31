@@ -8,7 +8,7 @@
         />
       </RouterLink>
       <span v-show="showdata.is_recently === 1" info="new"></span>
-      <span  v-show="showdata.quantities === 0"  info="not available"></span>
+      <span v-show="showdata.quantities === 0" info="not available"></span>
       <div class="icons">
         <q-btn icon="visibility" round @click="showDialog">
           <q-tooltip
@@ -45,8 +45,16 @@
     </div>
     <DialogBox v-model="dialogBox" :dialogData="showdata" />
   </div>
-  <q-rating class="q-mt-md" v-model="ratingModel" color="secondary" size="1.5rem" icon="star_border" icon-half="star_half" iconSelected="grade"/>
-
+  <q-rating
+    class="q-mt-md"
+    v-model="ratingModel"
+    @update:model-value="checkAuth"
+    color="secondary"
+    size="1.5rem"
+    icon="star_border"
+    icon-half="star_half"
+    iconSelected="grade"
+  />
 </template>
 
 <script setup>
@@ -55,16 +63,33 @@ import { useQuasar } from "quasar";
 import { useProductsStore } from "src/stores/products";
 import { useGeneralStore } from "src/stores/general";
 import { defineProps, ref } from "vue";
+import { useAuth } from "src/stores/auth";
+
 const products = useProductsStore();
 const $q = useQuasar();
+const user = useAuth();
 const lang = useGeneralStore();
 const dialogBox = ref(false);
 const favorit = ref(false);
-const ratingModel =ref(0)
+const ratingModel = ref(0);
+
 
 defineProps(["showdata"]);
 const showDialog = () => {
   dialogBox.value = true;
+};
+const checkAuth = () => {
+  if (!user.userToken) {
+    $q.notify({
+      message: `${
+        lang.lagn === "en" ? " Must Login first " : " يجب التسجل اولا "
+      }`,
+      position: "top",
+      color: "red-5",
+    });
+    ratingModel.value=0
+    return;
+  }
 };
 const addFavoritList = (item) => {
   if (products.favoritList.find((x) => x.id === item.id)) {

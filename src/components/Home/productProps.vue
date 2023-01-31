@@ -70,7 +70,7 @@ export default {
   padding-left: 20px;
   background-color: #f8f8f8;
   position: relative;
-  transform: translateY(-30%);
+  transform: translateY(-50%);
   z-index: 99;
   border-radius: 0px 20px 20px 0px;
 }

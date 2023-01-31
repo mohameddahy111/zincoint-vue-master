@@ -11,6 +11,10 @@ import { useRouter } from "vue-router";
 
 const user = useAuth();
 const $router = useRouter();
+
+watchEffect(()=>{
+  !user.userToken? $router.push('/'):''
+})
 </script>
 
 <style lang="scss" scoped></style>

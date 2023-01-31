@@ -68,7 +68,7 @@ export default {
       }
     }
     p {
-      width: 60%;
+      width: 70%;
     }
   }
 }

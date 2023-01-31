@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <q-btn flat label="Products" class="shadow-0">
-      <q-menu uclass=" shadow-0">
+    <q-btn flat label="Products">
+      <q-menu >
         <q-list dese style="min-width: 100px">
           <q-item
             clickable

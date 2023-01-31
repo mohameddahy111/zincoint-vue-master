@@ -1,37 +1,38 @@
 <template>
-  <q-layout view="hHh LpR fFf" :class="lang.lagn === 'ar' ? 'aribc' :''">
-    <q-header reveal class="bg-white text-black">
-      <q-toolbar class="q-toolbar--inset q-pr-xl">
+  <q-layout view="hHh LpR fFf" :class="lang.lagn === 'ar' ? 'aribc' : ''" rounded-borders>
+    <q-header reveal class=" bg-transparent ">
+      <q-toolbar class=" q-px-lg">
         <div class="flex justify-between items-center full-width">
           <div class="">
-            <q-toolbar-title class=" flex">
+            <q-toolbar-title>
               <zinco-logo />
-              <div class="xs-hide sm-hide">
-                <SearchBox />
-              </div>
             </q-toolbar-title>
           </div>
-          <div class="flex items-center q-gutter-md header-Links xs-hide">
+          <div
+            class="flex items-center justify-end q-gutter-md header-Links xs-hide"
+          >
             <MenuItems />
             <RouterLink to="/about">About us</RouterLink>
             <RouterLink to="/contact">contact us</RouterLink>
           </div>
           <div class="flex items-center justify-center">
-            <Language />
-            <UserAvatarLayout />
-            <div class="">
-              <q-btn
-                dense
-                round
-                flat
-                icon="shopping_cart"
-                @click="$router.push('/cart')"
-              >
-                <q-badge color="red" floating transparent>
-                  {{ products.cartItems.length }}
-                </q-badge>
-              </q-btn>
+            <div class="xs-hide sm-hide">
+              <SearchBox />
             </div>
+            <Language />
+
+            <UserAvatarLayout />
+            <q-btn
+              dense
+              round
+              flat
+              icon="shopping_cart"
+              @click="$router.push('/cart')"
+            >
+              <q-badge color="red" floating transparent>
+                {{ products.cartItems.length }}
+              </q-badge>
+            </q-btn>
           </div>
         </div>
       </q-toolbar>
@@ -90,8 +91,7 @@ import UserAvatarLayout from "src/components/Layouts/UserAvatarLayout.vue";
 import { useProductsStore } from "src/stores/products";
 import FootrtZinco from "src/components/Layouts/FooterZinco.vue";
 import { useRouter } from "vue-router";
-import { useGeneralStore } from 'src/stores/general';
-
+import { useGeneralStore } from "src/stores/general";
 
 export default {
   components: {
@@ -116,21 +116,25 @@ export default {
         leftDrawerOpen.value = false;
       },
       products,
-      lang:useGeneralStore()
+      lang: useGeneralStore(),
     };
   },
 };
 </script>
 
 <style scoped>
+.header-Links {
+  /* transform: translateX(25%); */
+  width: 400px;
+}
 .header-Links a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 @media screen and (max-width: 600px) {
   .header-Links a {
     text-decoration: none;
-    color: black;
+    color: #fff;
   }
 }
 </style>
