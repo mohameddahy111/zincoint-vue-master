@@ -73,7 +73,6 @@ const dialogBox = ref(false);
 const favorit = ref(false);
 const ratingModel = ref(0);
 
-
 defineProps(["showdata"]);
 const showDialog = () => {
   dialogBox.value = true;
@@ -87,11 +86,22 @@ const checkAuth = () => {
       position: "top",
       color: "red-5",
     });
-    ratingModel.value=0
+    ratingModel.value = 0;
     return;
   }
 };
 const addFavoritList = (item) => {
+  if (!user.userToken) {
+    $q.notify({
+      message: `${
+        lang.lagn === "en" ? " Must Login first " : " يجب التسجل اولا "
+      }`,
+      position: "top",
+      color: "red-5",
+    });
+
+    return;
+  }
   if (products.favoritList.find((x) => x.id === item.id)) {
     products.favoritList = products.favoritList.filter((x) => x.id !== item.id);
     localStorage.setItem("favoritList", JSON.stringify(products.favoritList));
