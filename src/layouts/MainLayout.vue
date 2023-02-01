@@ -171,7 +171,7 @@ export default {
 
 }
 #layoutHeader {
-  z-index: 99999;
+  z-index: 12;
 }
 @media screen and (max-width: 600px) {
   .header-Links a {
