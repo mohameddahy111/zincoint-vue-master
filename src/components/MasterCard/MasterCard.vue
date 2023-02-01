@@ -49,7 +49,7 @@
     class="q-mt-md"
     v-model="ratingModel"
     @update:model-value="checkAuth"
-    color="secondary"
+    color="dark"
     size="1.5rem"
     icon="star_border"
     icon-half="star_half"

@@ -25,13 +25,19 @@
     <swiper-slide v-for="(x, index) in swiperData" :key="index">
       <master-card :showdata="x" />
       <p
-        class="text-center relative-position "
+        class="text-center relative-position"
         v-text="lang.lagn === 'en' ? x.name_en : x.name_ar"
       ></p>
       <p
         class="text-center relative-position"
-        v-text="lang.lagn === 'en' ? x.price + ' Rs' : x.price +  ' ريال  '"
+        v-text="lang.lagn === 'en' ? x.price + ' Rs' : x.price + ' ريال  '"
       ></p>
+      <p v-show="x.price > 500" class="">
+        <q-icon name="local_shipping" class="text-h6" />{{ "" }}
+        <span class=" text-weight-regular">
+          {{ lang.lagn === "ar" ? "شحن مجاني " : "Free Shipping" }}
+        </span>
+      </p>
     </swiper-slide>
   </swiper>
 </template>
@@ -57,7 +63,7 @@ defineProps(["swiperData"]);
   margin-top: 20px;
   width: 100%;
 }
-p{
+p {
   font-size: 18px;
   margin: 0px;
   font-weight: 700;
