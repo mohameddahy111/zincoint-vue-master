@@ -1,4 +1,4 @@
-import { ref  ,onMounted} from "vue";
+import { ref  ,onMounted, computed} from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 
@@ -12,9 +12,7 @@ export const useProductsStore = defineStore("products", () => {
   const favoritList = ref(
     localStorage.favoritList ? JSON.parse(localStorage.favoritList) : []
   );
-  const cartItems = ref(
-    localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []
-  );
+  const cartItems= ref(localStorage.cartItems? JSON.parse(localStorage.cartItems):[])
   const imageUrl = ref("https://zincoint.com/public/upload/products/gallery/");
   const iconsUrl = ref(
     "https://zincoint.com/public/upload/categories/categories_icons/"
@@ -50,6 +48,9 @@ export const useProductsStore = defineStore("products", () => {
     const { data } = await axios.get(`/product/${id}`);
     productDetails.value =await data.data;
   }
+
+
+
 
   return {
     CategoryWithProducts,

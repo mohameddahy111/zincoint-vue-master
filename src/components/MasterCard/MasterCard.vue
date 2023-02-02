@@ -10,7 +10,7 @@
       <span v-show="showdata.is_recently === 1" info="new"></span>
       <span v-show="showdata.quantities === 0" info="not available"></span>
       <div class="icons">
-        <q-btn icon="visibility" round @click="showDialog">
+        <q-btn icon="visibility" round>
           <q-tooltip
             anchor="center right"
             self="center left"
@@ -32,7 +32,7 @@
             favorite
           </q-tooltip>
         </q-btn>
-        <q-btn icon="shopping_cart" round @click="addToCart(showdata)">
+        <q-btn icon="shopping_cart" round  @click="showDialog" >
           <q-tooltip
             anchor="center right"
             self="center left"
@@ -124,37 +124,6 @@ const addFavoritList = (item) => {
         lang.lagn === "en"
           ? item.name_en + " Add to Favorit List"
           : "  تم اضافة " + item.name_ar + " الي المفضل  "
-      }`,
-      position: "top",
-      color: "green",
-    });
-  }
-};
-// Add to cart//
-const addToCart = (item) => {
-  const existItem = products.cartItems.find((x) => x.id === item.id);
-  if (existItem) {
-    existItem.quantiy = existItem.quantiy + 1;
-    localStorage.setItem("cartItems", JSON.stringify(products.cartItems));
-    $q.notify({
-      message: `${
-        lang.lagn === "en"
-          ? item.name_en + " Is Update "
-          : "تم  تعديل  " + item.name_ar
-      }`,
-      position: "top",
-      color: "warning",
-    });
-  } else {
-    const newItem = { ...item };
-    newItem.quantiy = 1;
-    products.cartItems.push({ ...newItem });
-    localStorage.setItem("cartItems", JSON.stringify(products.cartItems));
-    $q.notify({
-      message: `${
-        lang.lagn === "en"
-          ? item.name_en + "  Add to Cart"
-          : "تم  اضافة  " + item.name_ar + " الي عربة التسوق "
       }`,
       position: "top",
       color: "green",

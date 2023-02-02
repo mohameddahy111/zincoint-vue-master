@@ -101,7 +101,7 @@
     <q-btn
       round
       size="md"
-      class="fixed-bottom-left q-ma-lg bg-black text-white z-max"
+      class="fixed-bottom-left q-ma-lg bg-green-10 text-white z-max q-pa-sm"
     >
     <a href="https://api.whatsapp.com/send/?phone=966504899766&text&type=phone_number&app_absent=0">
 

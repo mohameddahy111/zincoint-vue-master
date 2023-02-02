@@ -71,7 +71,7 @@ export default {
   background-color: #f8f8f8;
   position: relative;
   transform: translateY(-50%);
-  z-index: 99;
+  z-index: 49;
   border-radius: 0px 20px 20px 0px;
 }
 .aribcleft {
