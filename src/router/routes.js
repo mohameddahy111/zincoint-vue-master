@@ -7,6 +7,8 @@ import Cart from 'src/pages/Cart.vue'
 import ReturnPolicy from 'src/pages/ReturnPolicy.vue'
 import PrivacyPolicy from 'src/pages/PrivacyPolicy.vue'
 import TermsCondition from 'src/pages/TermsCondition.vue'
+import Shipping from 'src/pages/Shipping.vue'
+import Profile from 'src/pages/Profile.vue';
 import Category from 'src/pages/Category.vue'
 const routes = [
   {
@@ -23,6 +25,8 @@ const routes = [
       { path: "/contact", component: () => import("pages/ContactUs.vue") },
       { path: "/login", component: () => import("pages/UserLogin.vue") },
       { path: "/register", component:Register },
+      { path: "/profile/:userid", component:Profile },
+      { path: "/shipping", component:Shipping },
       { path: "/category/:category", component:Category },
       { path: "/productdetails/:id", component: () => import("pages/SingleProductDetails.vue") },
 

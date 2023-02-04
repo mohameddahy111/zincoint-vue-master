@@ -98,19 +98,6 @@
         </div>
       </div>
     </section>
-    <q-btn
-      round
-      size="md"
-      class="fixed-bottom-left q-ma-lg bg-green-10 text-white z-max q-pa-sm"
-    >
-    <a href="https://api.whatsapp.com/send/?phone=966504899766&text&type=phone_number&app_absent=0">
-
-      <q-tooltip anchor="center right" self="top left">{{ lang.lagn === 'ar'? 'هل تحتاج للمساعدة' :'need help' }} </q-tooltip>
-      <q-icon size="md">
-        <i class="fa-brands fa-whatsapp"></i>
-      </q-icon>
-    </a>
-    </q-btn>
   </section>
 </template>
 

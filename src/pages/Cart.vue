@@ -115,7 +115,7 @@
               <td class="text-center">
                 <p>
                   {{
-                    lang.lagn === "ar" ? x.price + " ريال " : x.price + " RA"
+                    lang.lagn === "ar" ? x.price + " ريال " : x.price + " RS"
                   }}
                 </p>
               </td>
@@ -156,7 +156,7 @@
               </td>
               <td class="text-center">
                 <p>
-                  {{ x.price * x.quantity }}
+                  {{ parseFloat(x.price * x.quantity).toFixed(2) }}
                 </p>
               </td>
               <td class="text-center">
@@ -172,13 +172,31 @@
           </tbody>
         </q-markup-table>
       </div>
+      <div class="flex justify-around q-my-lg">
+        <h6>
+          {{ lang.lagn === "ar" ? "الاجمالي" : "total" }}:{{
+            parseFloat(total).toFixed(2)
+          }}
+          {{ lang.lagn === "ar" ? " ريال" : " Rs" }}
+        </h6>
+        <div class="">
+          <q-btn
+            unelevated
+            class="bg-primary text-black"
+            rounded
+            @click="()=>{$router.push('/shipping')}"
+          >
+            {{ lang.lagn === "ar" ? "اتمام الشراء " : "Check Cart" }}
+          </q-btn>
+        </div>
+      </div>
       <!-- Start total Table -->
       <div class="q-pa-md" v-show="products.cartItems.length > 0">
         <q-markup-table class="hide-scrollbar" flat>
           <thead>
             <tr class="text-capitalize">
               <div class="table-head full-width">
-                <th class="text-center">
+                <th class="text-center full-width">
                   <h6>
                     {{
                       lang.lagn === "ar"
@@ -187,15 +205,14 @@
                     }}
                   </h6>
                 </th>
-                <th class="text-center">
+                <th class="text-center full-width">
                   <h6>
                     {{
-
                       lang.lagn === "ar" ? "إجمالي الخصم" : " Total discount"
                     }}
                   </h6>
                 </th>
-                <th class="text-center">
+                <th class="text-center full-width">
                   <h6>
                     {{
                       lang.lagn === "ar"
@@ -204,7 +221,7 @@
                     }}
                   </h6>
                 </th>
-                <th class="text-center">
+                <th class="text-center full-width">
                   <h6>
                     {{
                       lang.lagn === "ar"
@@ -213,7 +230,9 @@
                     }}
                   </h6>
                 </th>
-                <th class="text-center">
+                <th
+                  class="text-center bg-primary border-radius-inherit full-width"
+                >
                   <h6>
                     {{ lang.lagn === "ar" ? "	الاجمالي المستحق" : "Total " }}
                   </h6>
@@ -223,21 +242,82 @@
           </thead>
           <tbody>
             <tr>
-              <div class="table-body">
+              <div class="table-body q-px-lg">
                 <td class="text-center">
-                  {{ total }}
+                  <p>
+                    {{
+                      lang.lagn === "ar"
+                        ? parseFloat(total).toFixed(2) + " ريال "
+                        : parseFloat(total).toFixed(2) + " RS "
+                    }}
+                  </p>
                 </td>
-                <td class="text-center">
-                  {{ discount }}
+                <td
+                  :class="
+                    lang.lagn === 'ar'
+                      ? 'text-center border-right text-red'
+                      : 'text-center border-left text-red'
+                  "
+                >
+                  <p>
+                    -
+                    {{
+                      lang.lagn === "ar"
+                        ? parseFloat(discount).toFixed(2) + " ريال "
+                        : parseFloat(discount).toFixed(2) + " RS "
+                    }}
+                  </p>
                 </td>
-                <td class="text-center">
-                  {{ total - discount }}
+                <td
+                  :class="
+                    lang.lagn === 'ar'
+                      ? 'text-center border-right'
+                      : 'text-center border-left'
+                  "
+                >
+                  <p>
+                    {{
+                      lang.lagn === "ar"
+                        ? parseFloat(total - discount).toFixed(2) + " ريال "
+                        : parseFloat(total - discount).toFixed(2) + " RS "
+                    }}
+                  </p>
                 </td>
-                <td class="text-center">
-                  {{ (total - discount) * 0.15 }}
+                <td
+                  :class="
+                    lang.lagn === 'ar'
+                      ? 'text-center border-right'
+                      : 'text-center border-left'
+                  "
+                >
+                  <p>
+                    {{
+                      lang.lagn === "ar"
+                        ? parseFloat((total - discount) * 0.15).toFixed(2) +
+                          " ريال "
+                        : parseFloat((total - discount) * 0.15).toFixed(2) +
+                          " RS "
+                    }}
+                  </p>
                 </td>
-                <td class="text-center">
-                  {{parseFloat(total + (total - discount) * 0.15 ).toFixed(2)}}
+                <td
+                  :class="
+                    lang.lagn === 'ar'
+                      ? 'text-center border-right'
+                      : 'text-center border-left'
+                  "
+                >
+                  <p>
+                    {{
+                      lang.lagn === "ar"
+                        ? parseFloat(total + (total - discount) * 0.15).toFixed(
+                            2
+                          ) + " ريال "
+                        : parseFloat(total + (total - discount) * 0.15).toFixed(
+                            2
+                          ) + " RS "
+                    }}
+                  </p>
                 </td>
               </div>
             </tr>
@@ -252,7 +332,7 @@
 
 <script setup>
 import { useAuth } from "src/stores/auth";
-import { ref, watchEffect, reactive, onUpdated } from "vue";
+import { ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useProductsStore } from "src/stores/products";
 import { useGeneralStore } from "src/stores/general";
@@ -263,13 +343,25 @@ const $router = useRouter();
 const products = useProductsStore();
 const lang = useGeneralStore();
 const $q = useQuasar();
-const step = ref(2);
+const step = ref(1);
 const total = ref(
   products.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
 );
 const discount = ref(
   products.cartItems.reduce((a, c) => a + c.quantity * c.price * c.offer, 0)
 );
+
+watchEffect(() => {
+  total.value = products.cartItems.reduce(
+    (a, c) => a + c.quantity * c.price,
+    0
+  );
+
+  discount.value = products.cartItems.reduce(
+    (a, c) => a + c.quantity * c.price * c.offer,
+    0
+  );
+});
 
 watchEffect(() => {
   !user.userToken ? $router.push("/") : "";
@@ -288,6 +380,7 @@ const quantity = (id, opp) => {
         position: "top",
         color: "red-5",
       });
+      cart.value = products.cartItems;
     } else {
       $q.notify({
         message: `${lang.lagn === "en" ? " Is Update " : "تم  تعديل  "}`,
@@ -314,12 +407,14 @@ const deleteItem = (item) => {
 <style lang="scss" scoped>
 h6 {
   margin: 0;
-  padding: 10px;
   font-weight: 700;
 }
 p {
   font-size: 18px;
+  margin-top: 10px;
+  font-weight: 500;
 }
+
 .td-img {
   width: 60px;
   border-radius: 50%;
@@ -332,13 +427,28 @@ p {
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   // background-color: red;
 }
+
 .table-body {
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  .border-right {
+    border-right: 1.5px solid rgb(176, 175, 175);
+    margin: 10px 20px;
+    padding-right: 20px;
+  }
+  .border-left {
+    border-left: 1.5px solid rgb(176, 175, 175);
+    margin: 10px 20px;
+    padding-left: 20px;
+    width: 100%;
+  }
 }
 .quantity-list-item {
   display: flex;

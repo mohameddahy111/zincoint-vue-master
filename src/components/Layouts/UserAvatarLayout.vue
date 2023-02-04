@@ -22,7 +22,10 @@
                   <q-icon name="account_circle" />
                 </q-item-section>
                 <q-item-section>
-                  <RouterLink class="q-btn-item" to="/profile">
+                  <RouterLink
+                    class="q-btn-item"
+                    :to="`/profile/${user.user.id}`"
+                  >
                     profile
                   </RouterLink>
                 </q-item-section>
@@ -60,7 +63,14 @@
             {{ user.user.first_name }}
           </div>
 
-          <q-btn color="primary" @click="user.logout" label="Logout" push size="sm" v-close-popup />
+          <q-btn
+            color="primary"
+            @click="user.logout"
+            label="Logout"
+            push
+            size="sm"
+            v-close-popup
+          />
         </div>
       </div>
     </q-btn-dropdown>
@@ -77,7 +87,6 @@ export default {
     const user = useAuth();
     return {
       mobileData: ref(false),
-      bluetooth: ref(false),
       user,
     };
   },

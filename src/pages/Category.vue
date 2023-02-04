@@ -164,7 +164,7 @@ const paginationSet = async (value) => {
       .then((res) => {
         products.value = res.data.data.products;
       });
-    $q.loading.hide();
+      $q.loading.hide();
   } catch (error) {}
 };
 </script>
