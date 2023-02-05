@@ -96,16 +96,16 @@
                   </router-link>
                 </div>
 
+                <router-link :to="`/productdetails/${x.id}`">
                 <div class="td-img" v-for="(x, index) in x.images" :key="index">
-                  <router-link :to="`/productdetails/${x.id}`">
                     <img
                       :src="products.imageUrl + x.name"
                       v-show="x.default === 1"
                       alt="x.name"
                       class="full-width"
                     />
-                  </router-link>
-                </div>
+                  </div>
+                </router-link>
               </td>
               <td class="text-center">
                 <p>
@@ -172,7 +172,7 @@
           </tbody>
         </q-markup-table>
       </div>
-      <div class="flex justify-around q-my-lg">
+      <div class="flex justify-around q-my-lg" v-show="products.cartItems.length >0">
         <h6>
           {{ lang.lagn === "ar" ? "الاجمالي" : "total" }}:{{
             parseFloat(total).toFixed(2)

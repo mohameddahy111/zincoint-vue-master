@@ -211,7 +211,7 @@
       </div>
       <router-link
         class="q-mt-md text-secondary"
-        to="/login"
+        to="/login" 
         v-text="
           lagn.lagn === 'ar'
             ? ' هل لديك حساب فى زينــكو؟'

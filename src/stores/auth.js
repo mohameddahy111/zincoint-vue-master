@@ -8,7 +8,9 @@ import { useRouter } from "vue-router";
 export const useAuth = defineStore("auth", () => {
   axios.defaults.baseURL = "https://zincoint.com/api/";
   const user = ref(localStorage.useInf ? JSON.parse(localStorage.useInf) : {});
-  const userToken = ref(localStorage.userToken ? JSON.parse(localStorage.userToken) : null);
+  const userToken = ref(
+    localStorage.userToken ? JSON.parse(localStorage.userToken) : null
+  );
 
   const $q = useQuasar();
   const lagn = useGeneralStore();
@@ -41,7 +43,7 @@ export const useAuth = defineStore("auth", () => {
           position: "top",
         });
         user.value = data.user;
-        userToken.value = data.token
+        userToken.value = data.token;
         $q.loading.hide();
         $router.push("/");
       }
@@ -122,7 +124,7 @@ export const useAuth = defineStore("auth", () => {
         localStorage.removeItem("userToken", JSON.stringify(data.token));
         localStorage.removeItem("useInf", JSON.stringify(data.user));
         user.value = {};
-        userToken.value =null
+        userToken.value = null;
 
         $q.loading.hide();
         $q.notify({
@@ -149,6 +151,44 @@ export const useAuth = defineStore("auth", () => {
       });
     }
   };
+  const changeMyProfileInforamtion = async (values) => {
+    $q.loading.show({
+      spinner: QSpinnerFacebook,
+      spinnerColor: "yellow",
+      spinnerSize: 140,
+      backgroundColor: "purple",
+      message: "Some important process is in progress. Hang on...",
+      messageColor: "black",
+    });
+    try {
+      await axios.post("auth/save_my_profile", {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        phone: values.mobile,
+      }).then((res)=>console.log(res))
+      $q.loading.hide()
+    } catch (error) {}
+  };
+  const passwordUpdate= async(values)=>{
+    $q.loading.show({
+      spinner: QSpinnerFacebook,
+      spinnerColor: "yellow",
+      spinnerSize: 140,
+      backgroundColor: "purple",
+      message: "Some important process is in progress. Hang on...",
+      messageColor: "black",
+    });
+    try {
+      await axios.post("auth/save_my_password", {
+        currentPassword: values.currentPassword,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+      }).then((res)=>console.log(res))
+      $q.loading.hide()
+    } catch (error) {}
+
+
+  }
 
   return {
     user,
@@ -156,5 +196,7 @@ export const useAuth = defineStore("auth", () => {
     register,
     logout,
     userToken,
+    changeMyProfileInforamtion,
+    passwordUpdate,
   };
 });
