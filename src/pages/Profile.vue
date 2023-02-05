@@ -170,7 +170,7 @@
               marginTop: '10px',
             }"
             :type="isPwd ? 'password' : 'text'"
-            v-model="password"
+            v-model="Newpassword"
             lazy-rules
             :rules="[
               (val) =>
@@ -203,18 +203,77 @@
             ? " Confirm the new password"
             : " تأكيد كلمة المرور الجديدة "
         }}</label>
+        <q-input
+          class="full-width"
+          rounded
+          outlined
+          :input-style="{
+            padding: '20px 20px',
+            fontSize: '18px',
+            marginTop: '10px',
+          }"
+          :type="isPwdNC ? 'password' : 'text'"
+          v-model="confirmPassword"
+          lazy-rules
+          :rules="[
+            (val) =>
+              (val !== null && val !== '') ||
+              `${
+                lang.lagn === 'ar'
+                  ? 'كلمة المرور مطلوب '
+                  : 'Password is Requierd'
+              }`,
+            (val) =>
+              val.length > 8 ||
+              `${
+                lang.lagn === 'ar'
+                  ? 'كلمة المرور يجب ان تكون اكثر من 8 احرف '
+                  : 'Password more than 8'
+              }`,
+          ]"
+        >
+          <template v-slot:append>
+            <q-icon
+              :name="isPwdNC ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwdNC = !isPwdNC"
+            />
+          </template>
+        </q-input>
+        <q-item>
+          <q-btn
+            class="full-width bg-primary text-black"
+            unelevated
+            rounded
+            type="submit"
+          >
+            {{ lang.lagn === "ar" ? "تحديث كلمة المرور" : "Password update" }}
+          </q-btn>
+        </q-item>
+      </q-list>
+    </q-form>
+    <!-- change email form -->
+
+    <h6 class="text-center">
+      {{ lang.lagn === "ar" ? "تحديت  البريد الالكتروني " : "E-mail update" }}
+    </h6>
+    <q-form @submit="emailUpdate" class="form q-pa-md">
+      <q-list>
+        <label class="q-px-lg text-capitalize text-h6">{{
+          lang.lagn === "en" ? "  Password" : " كلمة المرور  "
+        }}</label>
         <q-item>
           <q-input
-            class="full-width"
             rounded
+            class="full-width"
             outlined
             :input-style="{
               padding: '20px 20px',
               fontSize: '18px',
               marginTop: '10px',
             }"
-            :type="isPwdNC ? 'password' : 'text'"
-            v-model="confirmPassword"
+            :type="isPwd ? 'password' : 'text'"
+            v-model="password"
             lazy-rules
             :rules="[
               (val) =>
@@ -235,12 +294,40 @@
           >
             <template v-slot:append>
               <q-icon
-                :name="isPwdNC ? 'visibility_off' : 'visibility'"
+                :name="isPwd ? 'visibility_off' : 'visibility'"
                 class="cursor-pointer"
-                @click="isPwdNC = !isPwdNC"
+                @click="isPwd = !isPwd"
               />
             </template>
           </q-input>
+        </q-item>
+        <label class="q-px-lg text-capitalize text-h6">{{
+          lang.lagn === "en" ? "Your E-mail" : "ادخل البريد الالكتروني"
+        }}</label>
+
+        <q-item class="item">
+          <q-input
+            class="full-width"
+            rounded
+            :input-style="{
+              padding: '20px 20px',
+              fontSize: '18px',
+              marginTop: '10px',
+            }"
+            outlined
+            v-model="email"
+            type="email"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val && val.length > 0) ||
+                `${
+                  lang.lagn === 'ar'
+                    ? 'البريد الالكتروني مطلوب '
+                    : 'E-mail is Requierd'
+                }`,
+            ]"
+          />
         </q-item>
         <q-item>
           <q-btn
@@ -249,7 +336,9 @@
             rounded
             type="submit"
           >
-            {{ lang.lagn === "ar" ? "تحديث كلمة المرور" : "Password update" }}
+            {{
+              lang.lagn === "ar" ? "تحديث البريد الالكتروني" : "ُE-mail update"
+            }}
           </q-btn>
         </q-item>
       </q-list>
@@ -276,8 +365,10 @@ const firstName = ref(user.user.first_name);
 const lastName = ref(user.user.last_name);
 const mobile = ref(user.user.phone);
 const currentPassword = ref("");
-const password = ref("");
+const Newpassword = ref("");
 const confirmPassword = ref("");
+const email = ref(user.user.email);
+const password = ref("");
 
 watchEffect(() => {
   !user.userToken ? $router.push("/") : "";
@@ -292,10 +383,17 @@ const onSubmitInfoForm = () => {
 const passwordUpdate = () => {
   user.passwordUpdate({
     currentPassword: currentPassword.value,
-    password: password.value,
+    password: Newpassword.value,
     confirmPassword: confirmPassword.value,
   });
 };
+const emailUpdate=()=>{
+  user.emailUpdate({
+    email:email.value,
+    currentPasswordEmail :password.value
+
+  })
+}
 </script>
 
 <style lang="scss" scoped>

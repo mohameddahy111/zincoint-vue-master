@@ -161,15 +161,17 @@ export const useAuth = defineStore("auth", () => {
       messageColor: "black",
     });
     try {
-      await axios.post("auth/save_my_profile", {
-        first_name: values.firstName,
-        last_name: values.lastName,
-        phone: values.mobile,
-      }).then((res)=>console.log(res))
-      $q.loading.hide()
+      await axios
+        .post("auth/save_my_profile", {
+          first_name: values.firstName,
+          last_name: values.lastName,
+          phone: values.mobile,
+        })
+        .then((res) => console.log(res));
+      $q.loading.hide();
     } catch (error) {}
   };
-  const passwordUpdate= async(values)=>{
+  const passwordUpdate = async (values) => {
     $q.loading.show({
       spinner: QSpinnerFacebook,
       spinnerColor: "yellow",
@@ -179,17 +181,60 @@ export const useAuth = defineStore("auth", () => {
       messageColor: "black",
     });
     try {
-      await axios.post("auth/save_my_password", {
-        currentPassword: values.currentPassword,
-        password: values.password,
-        confirmPassword: values.confirmPassword,
-      }).then((res)=>console.log(res))
-      $q.loading.hide()
+      await axios
+        .post("auth/save_my_password", {
+          currentPassword: values.currentPassword,
+          password: values.password,
+          confirmPassword: values.confirmPassword,
+        })
+        .then((res) => console.log(res));
+      $q.loading.hide();
     } catch (error) {}
+  };
 
+  const emailUpdate = async (values) => {
+    $q.loading.show({
+      spinner: QSpinnerFacebook,
+      spinnerColor: "yellow",
+      spinnerSize: 140,
+      backgroundColor: "purple",
+      message: "Some important process is in progress. Hang on...",
+      messageColor: "black",
+    });
+    try {
+      await axios
+        .post("auth/save_my_email", {
+          email: values.email,
+          currentPasswordEmail: values.currentPasswordEmail,
+        })
+        .then((res) => console.log(res));
+      $q.loading.hide();
+    } catch (error) {}
+  };
 
-  }
+  const forgetPassword = async (values) => {
+    $q.loading.show({
+      spinner: QSpinnerFacebook,
+      spinnerColor: "yellow",
+      spinnerSize: 140,
+      backgroundColor: "purple",
+      message: "Some important process is in progress. Hang on...",
+      messageColor: "black",
+    });
+    try {
+      await axios
+        .post("auth/forgot_password", {
+          email: values.email,
+        })
+        .then((res) => console.log(res));
 
+      $q.loading.hide();
+    } catch (error) {
+      $q.loading.hide();
+      console.log(error)
+
+    }
+  };
   return {
     user,
     login,
@@ -198,5 +243,7 @@ export const useAuth = defineStore("auth", () => {
     userToken,
     changeMyProfileInforamtion,
     passwordUpdate,
+    emailUpdate,
+    forgetPassword,
   };
 });

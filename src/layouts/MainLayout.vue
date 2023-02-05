@@ -57,6 +57,7 @@
     </q-header>
 
     <router-view />
+    <!-- <zinco-intero/> -->
     <FootrtZinco />
 
     <q-drawer
@@ -102,7 +103,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import ZincoLogo from "src/components/Layouts/ZincoLogo.vue";
 import MenuItems from "src/components/Layouts/MenuItems.vue";
 import SearchBox from "src/components/Layouts/SearchBox.vue";
@@ -112,6 +113,7 @@ import { useProductsStore } from "src/stores/products";
 import FootrtZinco from "src/components/Layouts/FooterZinco.vue";
 import { useRouter , useRoute } from "vue-router";
 import { useGeneralStore } from "src/stores/general";
+import ZincoIntero from 'src/components/ZincoIntero.vue';
 
 export default {
   components: {
@@ -121,6 +123,7 @@ export default {
     UserAvatarLayout,
     Language,
     FootrtZinco,
+    ZincoIntero,
   },
   setup() {
     const details = {
@@ -166,7 +169,9 @@ export default {
     };
   },
 };
+
 </script>
+
 
 <style scoped>
 .header-Links ,.header-Links-black{

@@ -10,6 +10,7 @@ import TermsCondition from 'src/pages/TermsCondition.vue'
 import Shipping from 'src/pages/Shipping.vue'
 import Profile from 'src/pages/Profile.vue';
 import Category from 'src/pages/Category.vue'
+import ForgetPassword from 'src/pages/ForgetPassword.vue'
 const routes = [
   {
     path: "/",
@@ -27,6 +28,7 @@ const routes = [
       { path: "/register", component:Register },
       { path: "/profile/:userid", component:Profile },
       { path: "/shipping", component:Shipping },
+      { path: "/forgetPassword", component:ForgetPassword },
       { path: "/category/:category", component:Category },
       { path: "/productdetails/:id", component: () => import("pages/SingleProductDetails.vue") },
 

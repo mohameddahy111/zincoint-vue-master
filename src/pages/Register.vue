@@ -211,7 +211,7 @@
       </div>
       <router-link
         class="q-mt-md text-secondary"
-        to="/login" 
+        to="/login"
         v-text="
           lagn.lagn === 'ar'
             ? ' هل لديك حساب فى زينــكو؟'
@@ -288,6 +288,10 @@ export default {
   }
   @media screen and (max-width: 600px) {
     width: 100%;
+    h3{
+      font-size: 18px;
+    }
+
     .item {
       flex-direction: column;
     }

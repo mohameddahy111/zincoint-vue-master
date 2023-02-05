@@ -197,13 +197,13 @@
         <TabGuarantee :showData="products.productDetails" />
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-12" v-show="products.productDetails.related?.length >0">
       <div class="q-pa-lg">
         <p class="text-h4 q-my-lg text-weight-bold">
           {{ lagn.lagn === "ar" ? "المنتجات المتعلقة" : "Related products" }}
         </p>
 
-        <DetilsSwiper :swiperData="products.productDetails.related" />
+        <DetilsSwiper :swiperData="products.productDetails.related"  />
       </div>
     </div>
   </q-page-container>

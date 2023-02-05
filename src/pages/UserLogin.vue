@@ -1,8 +1,10 @@
 <template>
   <q-page-container :class="lagn.lagn === 'ar' ? 'q-pa-md aribc' : 'q-pa-md'">
-
     <q-form @submit="onSubmit" class="q-gutter-md form shadow-5 q-pa-md">
-      <h3 class=" text-capitalize text-center text-weight-bold" v-text="lagn.lagn ==='ar'? 'تسجيل الدخول' :'log in '"></h3>
+      <h3
+        class="text-capitalize text-center text-weight-bold"
+        v-text="lagn.lagn === 'ar' ? 'تسجيل الدخول' : 'log in '"
+      ></h3>
       <q-input
         rounded
         :input-style="{
@@ -61,32 +63,39 @@
           />
         </template>
       </q-input>
-<div class=" flex justify-between items-center">
-
-  <q-toggle
-  v-model="accept"
-  :label="
-          lagn.lagn === 'en'
-          ? 'stay registered'
-          : 'ابقني مسجل  '
+      <div class="flex justify-between items-center">
+        <q-toggle
+          v-model="accept"
+          :label="lagn.lagn === 'en' ? 'stay registered' : 'ابقني مسجل  '"
+        />
+        <router-link
+          class="text-secondary"
+          to="/forgetPassword"
+          v-text="
+            lagn.lagn === 'ar' ? ' هل فقدت كلمة المرور ؟' : 'Forget password ?'
           "
-      />
-      <router-link class=" text-secondary" to="/" v-text="lagn.lagn === 'ar'? ' هل فقدت كلمة المرور ؟' :'Forget password ?'">
-      </router-link>
-
-    </div>
+        >
+        </router-link>
+      </div>
       <div>
         <q-btn
-          class=" full-width text-h6 q-mb-md"
+          class="full-width text-h6 q-mb-md"
           rounded
           :label="lagn.lagn === 'en' ? 'Log in' : 'تسجيل الدخول'"
           type="submit"
           color="primary"
         />
       </div>
-      <router-link class=" q-mt-md text-secondary" to="/register" v-text="lagn.lagn === 'ar'? ' ليس لديك حساب في زينكو ؟' :'Dont have an account in Zinco?'">
+      <router-link
+        class="q-mt-md text-secondary"
+        to="/register"
+        v-text="
+          lagn.lagn === 'ar'
+            ? ' ليس لديك حساب في زينكو ؟'
+            : 'Dont have an account in Zinco?'
+        "
+      >
       </router-link>
-
     </q-form>
   </q-page-container>
 </template>
@@ -124,10 +133,20 @@ export default {
 <style lang="scss" scoped>
 .form {
   width: 400px;
-  margin:20px auto;
+  margin: 20px auto;
   border-radius: 20px;
-  a{
+  a {
     color: inherit;
   }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    h3{
+      font-size: 18px;
+    }
+    .item {
+      flex-direction: column;
+    }
+  }
+
 }
 </style>
