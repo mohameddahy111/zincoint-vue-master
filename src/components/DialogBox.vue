@@ -3,11 +3,7 @@
     <q-card style="width: 700px; max-width: 80vw">
       <q-card-section>
         <p class="text-h6 text-capitalize">
-          {{
-            lagn.lagn === "ar"
-              ? dialogData.name_ar
-              : dialogData.name_en
-          }}
+          {{ lagn.lagn === "ar" ? dialogData.name_ar : dialogData.name_en }}
         </p>
       </q-card-section>
       <div class="row q-pa-sm">
@@ -84,9 +80,7 @@
             </q-item>
             <q-item>
               <p>{{ lagn.lagn === "ar" ? "النوع " : "Type " }} :</p>
-              <p>
-                {{ dialogData.type }}{{ id }}
-              </p>
+              <p>{{ dialogData.type }}{{ id }}</p>
             </q-item>
           </q-list>
         </div>
@@ -110,12 +104,9 @@
 
 <script setup>
 import {
-  computed,
   defineProps,
-  onMounted,
-  onUnmounted,
-  onUpdated,
   ref,
+  computed,
 } from "vue";
 import { useGeneralStore } from "src/stores/general";
 import { useProductsStore } from "src/stores/products";
@@ -127,15 +118,15 @@ const $q = useQuasar();
 const quantityValue = ref(1);
 const lagn = useGeneralStore();
 const $router = useRoute();
-const id = ref("");
+const id =ref('')
 
 const quantity = (oop) => {
   oop === "add" ? quantityValue.value++ : quantityValue.value--;
 };
-defineProps(["dialogData"]);
+defineProps(()=>["dialogData"]);
+computed(()=>id.value = this.dialogData.id )
 
 // Add to cart//
-
 const addToCart = (item, quantity) => {
   const existItem = products.cartItems.find((x) => x.id === item.id);
   if (existItem) {

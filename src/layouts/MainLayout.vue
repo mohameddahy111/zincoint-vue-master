@@ -4,7 +4,11 @@
     :class="lang.lagn === 'ar' ? 'aribc' : ''"
     rounded-borders
   >
-    <q-header reveal :class=" $route.path ==='/' ? ' bg-transparent' :'bg-white text-black'" id="layoutHeader">
+    <q-header
+      reveal
+      :class="$route.path === '/' ? ' bg-transparent' : 'bg-white text-black'"
+      id="layoutHeader"
+    >
       <q-toolbar class="q-px-lg" id="toolbar">
         <div class="flex justify-between items-center full-width">
           <div class="">
@@ -87,23 +91,25 @@
     <q-scroll-observer axis="vertical" @scroll="scrollWindo(details)" />
   </q-layout>
   <q-btn
-      round
-      size="md"
-      class="fixed-bottom-left q-ma-lg bg-green-10 text-white z-max q-pa-sm"
+    round
+    size="md"
+    class="fixed-bottom-left q-ma-lg bg-green-10 text-white z-max q-pa-sm"
+  >
+    <a
+      href="https://api.whatsapp.com/send/?phone=966504899766&text&type=phone_number&app_absent=0"
     >
-    <a href="https://api.whatsapp.com/send/?phone=966504899766&text&type=phone_number&app_absent=0">
-
-      <q-tooltip anchor="center right" self="top left">{{ lang.lagn === 'ar'? 'هل تحتاج للمساعدة' :'need help' }} </q-tooltip>
+      <q-tooltip anchor="center right" self="top left"
+        >{{ lang.lagn === "ar" ? "هل تحتاج للمساعدة" : "need help" }}
+      </q-tooltip>
       <q-icon size="md">
         <i class="fa-brands fa-whatsapp"></i>
       </q-icon>
     </a>
-    </q-btn>
-
+  </q-btn>
 </template>
 
 <script>
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref, watchEffect } from "vue";
 import ZincoLogo from "src/components/Layouts/ZincoLogo.vue";
 import MenuItems from "src/components/Layouts/MenuItems.vue";
 import SearchBox from "src/components/Layouts/SearchBox.vue";
@@ -111,9 +117,9 @@ import Language from "src/components/Layouts/Language.vue";
 import UserAvatarLayout from "src/components/Layouts/UserAvatarLayout.vue";
 import { useProductsStore } from "src/stores/products";
 import FootrtZinco from "src/components/Layouts/FooterZinco.vue";
-import { useRouter , useRoute } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useGeneralStore } from "src/stores/general";
-import ZincoIntero from 'src/components/ZincoIntero.vue';
+import ZincoIntero from "src/components/ZincoIntero.vue";
 
 export default {
   components: {
@@ -138,21 +144,29 @@ export default {
     const products = useProductsStore();
     const $router = useRouter();
     const $route = useRoute();
+
+
     const scrollWindo = () => {
-      if (window.scrollY > 300) {
+      if ($route.path === "/") {
+        if (window.scrollY > 300) {
+          document.getElementById("layoutHeader").classList =
+            "bg-white text-black fixed-top";
+          document.getElementById("headerLinks").classList =
+            "header-Links-black flex items-center justify-end q-gutter-md xs-hide";
+        } else {
+          document.getElementById("layoutHeader").classList =
+            "bg-transparent fixed-top text-white";
+          document.getElementById("headerLinks").classList =
+            "flex items-center justify-end q-gutter-md header-Links xs-hide";
+        }
+      } else {
         document.getElementById("layoutHeader").classList =
           "bg-white text-black fixed-top";
         document.getElementById("headerLinks").classList =
           "header-Links-black flex items-center justify-end q-gutter-md xs-hide";
       }
-      else {
-        document.getElementById("layoutHeader").classList =
-          "bg-transparent fixed-top text-white";
-          document.getElementById("headerLinks").classList =
-          "flex items-center justify-end q-gutter-md header-Links xs-hide";
-
-      }
     };
+
 
     return {
       leftDrawerOpen,
@@ -169,12 +183,10 @@ export default {
     };
   },
 };
-
 </script>
-
-
 <style scoped>
-.header-Links ,.header-Links-black{
+.header-Links,
+.header-Links-black {
   /* transform: translateX(25%); */
   width: 400px;
 }
@@ -187,10 +199,9 @@ export default {
   text-decoration: none;
   color: #000;
   font-size: 18px;
-
 }
 #layoutHeader {
-  z-index:50;
+  z-index: 50;
 }
 @media screen and (max-width: 600px) {
   .header-Links a {
